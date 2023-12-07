@@ -1,11 +1,11 @@
 import React from 'react'
-import CV from '../../assets/cv'
+import CV from '../../assets/CV_Antoine_Bouclier.pdf'
 
 const CTA = () => {
   return (
     <div className='cta'>
-        <a href="">Download CV</a>
-        <a href="#contact">Let's Talk</a>
+        <a href={CV} download className='btn'>Download CV</a>
+        <a href="#contact" className='btn btn-primary'>Let's Talk</a>
     </div>
   )
 }
