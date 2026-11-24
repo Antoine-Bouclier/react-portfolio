@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a0c10" />
+    <title>Politique de confidentialité</title>
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../ui.css" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="wrap top__inner">
+        <a href="/" class="logo">accueil<span class="cursor" aria-hidden="true">_</span></a>
+      </div>
+    </header>
+
+    <main class="wrap section texte-long">
+      <p class="prompt">cat confidentialite.txt</p>
+      <h1>Politique de confidentialité</h1>
+      <p class="maj">Mise à jour : 24 novembre 2026</p>
+
+      <p>
+        Cette page explique quelles données personnelles sont traitées par <strong>amaruq.fr</strong> et ses applications
+        (compte partagé, page d'accueil, Recettes, Todo et les suivantes), pourquoi, combien de temps, et comment
+        exercer vos droits. En bref : seules les données nécessaires au fonctionnement du service sont conservées,
+        elles restent en France, ne sont ni vendues ni partagées, et il n'y a ni publicité ni mesure d'audience.
+      </p>
+
+      <h2>Responsable du traitement</h2>
+      <p>Antoine Bouclier, particulier — <a href="mailto:contact@amaruq.fr">contact@amaruq.fr</a></p>
+
+      <h2>Données traitées et durée de conservation</h2>
+      <table>
+        <thead><tr><th>Où</th><th>Données</th><th>Conservation</th></tr></thead>
+        <tbody>
+          <tr><td>Compte partagé (auth.amaruq.fr)</td><td>identifiant, nom, adresse e-mail, mot de passe (enregistré sous forme chiffrée irréversible), appareils de double authentification</td><td>tant que le compte existe</td></tr>
+          <tr><td>Journal des connexions du compte</td><td>date, type d'événement (connexion, échec, changement de mot de passe…), adresse IP, navigateur</td><td>180 jours, et supprimé avec le compte</td></tr>
+          <tr><td>Recettes</td><td>vos recettes (titres, ingrédients, étapes, durées, photos) et votre compte dans l'application</td><td>jusqu'à leur suppression par vous ou la suppression de votre compte Recettes</td></tr>
+          <tr><td>Todo</td><td>vos tâches (texte, jour, fait ou non) et vos favoris</td><td>tâches : supprimées automatiquement 30 jours après leur date ; favoris : jusqu'à leur suppression</td></tr>
+          <tr><td>Page d'accueil</td><td>aucune donnée enregistrée (elle affiche seulement les informations de votre compte)</td><td>—</td></tr>
+          <tr><td>Journaux techniques du serveur</td><td>adresse IP, date, page demandée, navigateur</td><td>6 mois au plus</td></tr>
+          <tr><td>Sauvegardes</td><td>copie quotidienne des bases ci-dessus, pour pouvoir les restaurer en cas de panne</td><td>30 jours</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Pourquoi et sur quelle base</h2>
+      <ul>
+        <li><strong>Fournir le service que vous demandez</strong> (vous connecter, enregistrer vos recettes et vos tâches) :
+          exécution du service auquel vous vous inscrivez (article 6.1.b du RGPD).</li>
+        <li><strong>Assurer la sécurité</strong> (détecter les tentatives de connexion frauduleuses, diagnostiquer une panne) :
+          intérêt légitime (article 6.1.f du RGPD), pour les journaux et les sauvegardes.</li>
+      </ul>
+      <p>Aucune donnée n'est utilisée à des fins publicitaires, de profilage ou de revente.</p>
+
+      <h2>Qui y a accès</h2>
+      <p>
+        Seul l'éditeur (Antoine Bouclier) administre le serveur. Les données sont hébergées par
+        <strong>OVH SAS</strong> (Roubaix, France), qui agit comme sous-traitant technique et n'y accède pas.
+        Aucune donnée n'est transférée hors de l'Union européenne, ni communiquée à un tiers, sauf obligation légale.
+      </p>
+
+      <h2>Cookies</h2>
+      <p>
+        Seuls des cookies <strong>strictement nécessaires</strong> au fonctionnement sont utilisés ; ils sont exemptés de
+        consentement (article 82 de la loi Informatique et Libertés). Il n'y a ni cookie de mesure d'audience,
+        ni cookie publicitaire, ni bouton de réseau social.
+      </p>
+      <table>
+        <thead><tr><th>Cookie</th><th>Site</th><th>Rôle</th></tr></thead>
+        <tbody>
+          <tr><td><code>authentik_session</code>, <code>authentik_csrf</code></td><td>auth.amaruq.fr</td><td>rester connecté, protéger les formulaires</td></tr>
+          <tr><td><code>authentik_proxy_…</code></td><td>amaruq.fr et les applications protégées</td><td>vous reconnaître une fois connecté</td></tr>
+          <tr><td><code>sessionid</code>, <code>csrftoken</code></td><td>recettes.amaruq.fr</td><td>rester connecté, protéger les formulaires</td></tr>
+        </tbody>
+      </table>
+      <p>
+        Certaines applications gardent aussi des données dans votre navigateur (par exemple Recettes, pour fonctionner
+        sans connexion) : elles ne quittent pas votre appareil et disparaissent si vous videz les données du site.
+      </p>
+
+      <h2>Vos droits</h2>
+      <p>
+        Vous pouvez à tout moment accéder à vos données, les corriger, les supprimer, en demander une copie dans un
+        format réutilisable, ou vous opposer à un traitement :
+      </p>
+      <ul>
+        <li><strong>Corriger</strong> votre nom, e-mail ou mot de passe : réglages du compte sur
+          <a href="https://auth.amaruq.fr/if/user/">auth.amaruq.fr</a>.</li>
+        <li><strong>Supprimer votre compte</strong> : bouton « Supprimer le compte » dans ces mêmes réglages
+          (votre journal de connexions est effacé avec lui). Pour effacer aussi vos données dans une application,
+          utilisez sa propre suppression (Recettes : réglages du compte) ou écrivez-moi.</li>
+        <li><strong>Toute autre demande</strong> (copie de vos données, effacement des tâches Todo, question) :
+          <a href="mailto:contact@amaruq.fr">contact@amaruq.fr</a>. Réponse sous un mois au plus.</li>
+      </ul>
+      <p>
+        Si vous estimez que vos droits ne sont pas respectés, vous pouvez adresser une réclamation à la CNIL :
+        <a href="https://www.cnil.fr/fr/plaintes" rel="noopener noreferrer">www.cnil.fr/fr/plaintes</a>.
+      </p>
+
+      <h2>Sécurité</h2>
+      <p>
+        Les échanges sont chiffrés (HTTPS), les mots de passe ne sont jamais stockés en clair, la double authentification
+        est disponible pour chaque compte, l'accès au serveur est limité à l'éditeur, et les données sont sauvegardées
+        chaque nuit.
+      </p>
+
+      <h2>Mineurs</h2>
+      <p>Si vous avez moins de 15 ans, demandez l'accord d'un parent avant de créer un compte.</p>
+
+      <h2>Modifications</h2>
+      <p>
+        Cette page peut évoluer, par exemple à l'arrivée d'une nouvelle application. La date de mise à jour figure en haut
+        de page ; en cas de changement important, les personnes inscrites en seront informées.
+      </p>
+    </main>
+
+    <footer class="pied">
+      <div class="wrap pied__inner">
+        <span>amaruq.fr</span>
+        <ul class="pied__liens">
+          <li><a href="mentions-legales.html">mentions légales</a></li>
+          <li><a href="confidentialite.html">confidentialité</a></li>
+        </ul>
+      </div>
+    </footer>
+  </body>
+</html>

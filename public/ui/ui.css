@@ -1,0 +1,239 @@
+/* ui.css — style commun de mes sites (même look que le portfolio).
+   À charger AVANT la feuille de style du site, qui peut ensuite surcharger ce qu'elle veut.
+   Sommaire : 1. polices · 2. variables · 3. base · 4. mise en page · 5. en-tête · 6. boutons
+              7. titres & textes · 8. cartes & panneaux · 9. listes de lignes · 10. pastilles
+              11. champs · 12. barre de progression · 13. menu, infobulle, message · 14. accessibilité
+              15. pied de page · 16. page de texte */
+
+/* 1. Polices (chemins relatifs à ce fichier) -------------------------------------------------- */
+@font-face { font-family: 'Inter'; src: url('fonts/inter.woff2') format('woff2'); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: 'JetBrains Mono'; src: url('fonts/jetbrains-mono.woff2') format('woff2'); font-weight: 100 800; font-display: swap; }
+
+/* 2. Variables ------------------------------------------------------------------------------- */
+:root {
+  /* Couleurs */
+  --bg: #0a0c10;
+  --surface: #10141a;
+  --surface-2: #151b23;
+  --border: #222a35;
+  --border-hover: #2d3846;
+  --text: #e6edf3;
+  --muted: #8d96a3;
+  --accent: #3ee08f;
+  --accent-hover: #2fb873;
+  --accent-dim: rgba(62, 224, 143, 0.12);
+  --warn: #f2c14e;
+  --warn-dim: rgba(242, 193, 78, 0.12);
+  --bad: #f26d6d;
+  --bad-dim: rgba(242, 109, 109, 0.12);
+  /* Échelle d'une seule teinte (calendriers, intensités) : du sombre au vif */
+  --n0: #233b2d;
+  --n1: #1d5c3d;
+  --n2: #2b9c64;
+  --n3: #3ee08f;
+  /* Polices */
+  --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+  /* Formes */
+  --radius-sm: 6px;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --ombre: 0 12px 32px rgba(0, 0, 0, 0.5);
+  /* Largeurs */
+  --largeur: 1080px;
+  --gouttiere: 24px;
+  --cible: 44px; /* taille minimale d'un bouton au doigt */
+  color-scheme: dark;
+}
+
+/* 3. Base ------------------------------------------------------------------------------------ */
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: var(--sans); font-size: 16px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4, p, dl, dd, figure { margin: 0; }
+h1, h2, h3 { line-height: 1.15; letter-spacing: -0.02em; }
+img, svg { max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+::selection { background: var(--accent); color: var(--bg); }
+code { font-family: var(--mono); font-size: 0.92em; }
+
+.mono { font-family: var(--mono); }
+.muted { color: var(--muted); }
+.accent { color: var(--accent); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* 4. Mise en page ---------------------------------------------------------------------------- */
+.wrap { width: 100%; max-width: var(--largeur); margin-inline: auto; padding-inline: var(--gouttiere); }
+@media (max-width: 640px) { :root { --gouttiere: 16px; } }
+.pile { display: grid; gap: 16px; }
+.grille { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+.avec-cote { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 32px; align-items: start; }
+@media (max-width: 900px) { .avec-cote { grid-template-columns: minmax(0, 1fr); } }
+
+/* 5. En-tête --------------------------------------------------------------------------------- */
+.top {
+  position: sticky; top: 0; z-index: 10;
+  background: rgba(10, 12, 16, 0.8);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.top__inner { display: flex; justify-content: space-between; align-items: center; gap: 12px; height: 64px; }
+.logo { font-family: var(--mono); font-weight: 600; font-size: 16px; white-space: nowrap; }
+.logo::before { content: '> '; color: var(--accent); }
+.cursor { color: var(--accent); animation: ui-clignote 1.1s steps(1) infinite; }
+@keyframes ui-clignote { 50% { opacity: 0; } }
+.top__right { display: flex; align-items: center; gap: 12px; font-family: var(--mono); font-size: 13px; min-width: 0; }
+.top__user { color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* 6. Boutons --------------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: var(--mono); font-size: 14px; font-weight: 500;
+  padding: 11px 18px; min-height: var(--cible); border-radius: var(--radius);
+  border: 1px solid var(--border); background: var(--surface); color: var(--text);
+  cursor: pointer; white-space: nowrap; text-decoration: none;
+  transition: border-color .2s, color .2s, background .2s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.btn--primary { background: var(--accent); border-color: var(--accent); color: var(--bg); font-weight: 600; }
+.btn--primary:hover { background: transparent; color: var(--accent); }
+.btn--danger:hover { border-color: var(--bad); color: var(--bad); }
+.btn--small { padding: 7px 14px; min-height: 36px; font-size: 13px; }
+.btn--icon { width: 48px; height: 48px; padding: 0; font-size: 22px; line-height: 1; }
+.icone {
+  width: 42px; height: 42px; display: inline-grid; place-items: center; padding: 0;
+  border-radius: var(--radius); border: 1px solid transparent; background: transparent;
+  color: var(--muted); font-family: var(--mono); font-size: 19px; cursor: pointer;
+}
+.icone:hover { color: var(--text); border-color: var(--border); background: var(--surface-2); }
+.icone--danger:hover { color: var(--bad); }
+@media (hover: none) { .icone { width: var(--cible); height: var(--cible); } }
+.lien { font-family: var(--mono); font-size: 14px; color: var(--accent); display: inline-flex; gap: 6px; align-items: center; }
+.lien:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+/* 7. Titres & textes ------------------------------------------------------------------------- */
+.prompt { font-family: var(--mono); color: var(--accent); font-size: 13px; margin-bottom: 8px; }
+.prompt::before { content: '$ '; color: var(--muted); }
+.titre-1 { font-size: clamp(30px, 5vw, 48px); font-weight: 700; letter-spacing: -0.03em; }
+.titre-2 { font-size: clamp(24px, 3.5vw, 30px); }
+.titre-3 { font-size: 19px; }
+.texte-doux { color: var(--muted); }
+.section { padding-block: 48px; }
+@media (max-width: 640px) { .section { padding-block: 32px; } }
+
+/* 8. Cartes & panneaux ----------------------------------------------------------------------- */
+.panel { padding: 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); min-width: 0; }
+.h-panel { font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--accent); margin-bottom: 14px; letter-spacing: 0; }
+.h-panel::before { content: '# '; color: var(--muted); }
+.carte {
+  display: flex; flex-direction: column; gap: 12px; padding: 22px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  transition: border-color .2s, transform .2s;
+}
+a.carte:hover, .carte--lien:hover { border-color: rgba(62, 224, 143, 0.55); transform: translateY(-2px); }
+.carte__haut { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.carte p { color: var(--muted); font-size: 14.5px; }
+.vide { color: var(--muted); font-size: 14px; text-align: center; padding: 28px 16px; border: 1px dashed var(--border); border-radius: var(--radius-lg); }
+.chargement { padding: 64px 0; color: var(--muted); text-align: center; font-family: var(--mono); font-size: 13px; }
+
+/* 9. Listes de lignes (titre + détail + élément à droite) ------------------------------------- */
+.lignes { list-style: none; margin: 0; padding: 0; }
+.ligne { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 0; border-top: 1px solid var(--border); }
+.ligne:first-child { border-top: 0; padding-top: 0; }
+.ligne:last-child { padding-bottom: 0; }
+.ligne__titre { font-size: 15px; }
+.ligne__detail { font-family: var(--mono); font-size: 12px; color: var(--muted); overflow-wrap: anywhere; }
+
+/* 10. Pastilles & étiquettes ------------------------------------------------------------------ */
+.pill {
+  display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
+  font-family: var(--mono); font-size: 12px; padding: 2px 10px; border-radius: 999px;
+  background: var(--surface-2); color: var(--muted);
+}
+.pill::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.pill--ok { color: var(--accent); background: var(--accent-dim); }
+.pill--warn { color: var(--warn); background: var(--warn-dim); }
+.pill--bad { color: var(--bad); background: var(--bad-dim); }
+.tag { display: inline-block; font-family: var(--mono); font-size: 12px; color: var(--muted); border: 1px solid var(--border); border-radius: 999px; padding: 2px 10px; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
+.chip { display: inline-flex; align-items: stretch; width: fit-content; align-self: flex-start; max-width: 100%; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); transition: border-color .15s; }
+.chip:hover { border-color: var(--accent); }
+.chip > button { background: none; border: 0; cursor: pointer; font-size: 14.5px; }
+.chip__principal { padding: 9px 6px 9px 16px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 260px; }
+.chip__principal:hover { color: var(--accent); }
+.chip__retirer { padding: 9px 14px 9px 8px; color: var(--muted); font-family: var(--mono); font-size: 16px; }
+.chip__retirer:hover { color: var(--bad); }
+
+/* 11. Champs --------------------------------------------------------------------------------- */
+.champ {
+  width: 100%; min-height: var(--cible); padding: 10px 14px;
+  background: var(--bg); color: var(--text);
+  border: 1px solid var(--border); border-radius: var(--radius);
+  transition: border-color .15s;
+}
+.champ:focus { outline: none; border-color: var(--accent); }
+.champ::placeholder { color: var(--muted); }
+.etiquette { display: block; font-family: var(--mono); font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+.formulaire-ligne { display: flex; align-items: center; gap: 10px; padding: 6px 6px 6px 14px; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface); }
+.formulaire-ligne:focus-within { border-color: var(--accent); }
+.formulaire-ligne input { flex: 1; min-width: 0; background: transparent; border: 0; outline: 0; padding: 8px 0; }
+
+/* 12. Barre de progression ------------------------------------------------------------------- */
+.bar { height: 6px; border-radius: 3px; background: var(--surface-2); overflow: hidden; }
+.bar > span { display: block; height: 100%; width: 0; background: var(--accent); border-radius: 3px; transition: width .3s ease; }
+.bar--warn > span { background: var(--warn); }
+.bar--bad > span { background: var(--bad); }
+
+/* 13. Menu, infobulle, message ---------------------------------------------------------------- */
+.menu { position: fixed; z-index: 25; width: 280px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 6px; box-shadow: var(--ombre); }
+.menu__titre { font-family: var(--mono); font-size: 11px; color: var(--muted); padding: 6px 10px 4px; }
+.menu__item {
+  width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  background: none; border: 0; border-radius: var(--radius-sm); padding: 12px; cursor: pointer; font-size: 15px; text-align: left;
+}
+.menu__item:hover, .menu__item:focus-visible { background: var(--surface); color: var(--accent); }
+.bulle {
+  position: fixed; z-index: 20; pointer-events: none; white-space: nowrap;
+  background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius-sm);
+  padding: 6px 9px; font-family: var(--mono); font-size: 12px; box-shadow: var(--ombre);
+}
+.toast {
+  position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 30;
+  display: flex; align-items: center; gap: 10px; max-width: calc(100vw - 32px);
+  background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 10px 16px; font-family: var(--mono); font-size: 13px; box-shadow: var(--ombre);
+}
+.toast--erreur { border-color: var(--bad); color: var(--bad); }
+
+/* 15. Pied de page (liens légaux) ------------------------------------------------------------ */
+.pied { border-top: 1px solid var(--border); margin-top: 48px; padding-block: 24px; }
+.pied__inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.pied__liens { display: flex; flex-wrap: wrap; gap: 8px 20px; list-style: none; margin: 0; padding: 0; }
+.pied a:hover { color: var(--accent); }
+
+/* 16. Page de texte (mentions légales, confidentialité…) ---------------------------------------- */
+.texte-long { max-width: 72ch; }
+.texte-long h1 { font-size: clamp(28px, 4vw, 38px); margin-bottom: 8px; }
+.texte-long h2 { font-size: 20px; margin: 36px 0 10px; }
+.texte-long p, .texte-long li { color: #c9d1d9; }
+.texte-long p + p { margin-top: 10px; }
+.texte-long ul { padding-left: 20px; margin: 8px 0; }
+.texte-long li + li { margin-top: 4px; }
+.texte-long a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.texte-long table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; }
+.texte-long th, .texte-long td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--border); }
+.texte-long th { font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--muted); }
+.texte-long .maj { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+
+/* 14. Accessibilité -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
