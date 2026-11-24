@@ -21,6 +21,7 @@ import { projets, projets42, profil } from '../data/contenu';
                   en ligne
                 </span>
               )}
+              {p.prive && <span class="projet__prive mono">projet privé</span>}
             </div>
             <h3>{p.nom}</h3>
             <p class="projet__desc">{p.description}</p>
@@ -29,6 +30,7 @@ import { projets, projets42, profil } from '../data/contenu';
                 <li>{t}</li>
               ))}
             </ul>
+            {(p.site || p.code) && (
             <div class="projet__links">
               {p.site && (
                 <a href={p.site} class="link-arrow" target="_blank" rel="noopener noreferrer">
@@ -41,6 +43,7 @@ import { projets, projets42, profil } from '../data/contenu';
                 </a>
               )}
             </div>
+            )}
           </article>
         ))
       }
@@ -128,6 +131,13 @@ import { projets, projets42, profil } from '../data/contenu';
     color: var(--muted);
     font-size: 0.9688rem;
     flex: 1;
+  }
+  .projet__prive {
+    font-size: 0.75rem;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.15rem 0.6rem;
   }
   .projet__links {
     display: flex;

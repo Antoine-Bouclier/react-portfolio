@@ -20,6 +20,7 @@ export type Projet = {
   site?: string;
   code?: string;
   codeLabel?: string;
+  prive?: boolean; // projet privé : ni lien vers le site, ni lien vers le code
 };
 
 export const projets: Projet[] = [
@@ -34,14 +35,13 @@ export const projets: Projet[] = [
     code: 'https://github.com/Antoine-Bouclier/recipes_app',
   },
   {
-    nom: 'Mon serveur',
+    nom: 'Todo',
     description:
-      "Le serveur qui héberge ce site et mes applications. Chaque service tourne dans son conteneur derrière Traefik, " +
-      'avec HTTPS automatique. Un compte unique (Authentik, avec double authentification) ouvre tous mes sites. ' +
-      'Sauvegardes chaque nuit, pare-feu et fail2ban.',
-    tags: ['Linux', 'Docker', 'Traefik', 'Authentik', 'Nginx', 'Sécurité'],
-    code: 'https://github.com/Antoine-Bouclier/fiche_pratique_VPS',
-    codeLabel: 'Mes fiches',
+      'Une to-do list journalière : des tâches à cocher jour par jour, un aperçu des 30 derniers jours en calendrier, ' +
+      'des favoris pour reprendre une tâche en un clic et le report d’une tâche à la date de son choix. ' +
+      'Chaque personne a sa propre liste, derrière la connexion unique de mes sites.',
+    tags: ['Python', 'Flask', 'SQLite', 'JavaScript', 'Authentik', 'Docker'],
+    prive: true,
   },
   {
     nom: 'Webserv',
