@@ -20,7 +20,7 @@ export type Projet = {
   site?: string;
   code?: string;
   codeLabel?: string;
-  prive?: boolean; // projet privé : ni lien vers le site, ni lien vers le code
+  prive?: boolean; // projet privé : étiquette « projet privé », pas de lien
 };
 
 export const projets: Projet[] = [
@@ -39,9 +39,9 @@ export const projets: Projet[] = [
     description:
       'Une to-do list journalière : des tâches à cocher jour par jour, un aperçu des 30 derniers jours en calendrier, ' +
       'des favoris pour reprendre une tâche en un clic et le report d’une tâche à la date de son choix. ' +
-      'Chaque personne a sa propre liste, derrière la connexion unique de mes sites.',
+      'Ouverte à tous : on crée un compte et chacun a sa propre liste, grâce à la connexion unique de mes sites.',
     tags: ['Python', 'Flask', 'SQLite', 'JavaScript', 'Authentik', 'Docker'],
-    prive: true,
+    site: 'https://todo.antoine-bouclier.fr',
   },
   {
     nom: 'Webserv',
