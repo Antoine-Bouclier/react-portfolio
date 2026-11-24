@@ -1,0 +1,71 @@
+---
+import { competences } from '../data/contenu';
+---
+
+<section id="competences">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="prompt">cat competences.txt</p>
+      <h2>Compétences</h2>
+    </div>
+
+    <div class="groupes">
+      {
+        competences.map((g) => (
+          <div class="groupe reveal">
+            <h3 class="mono">{g.groupe}</h3>
+            <ul>
+              {g.items.map((it) => (
+                <li>{it}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .groupes {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+  }
+  @media (max-width: 960px) {
+    .groupes {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 480px) {
+    .groupes {
+      grid-template-columns: 1fr;
+    }
+  }
+  .groupe {
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .groupe h3 {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  .groupe h3::before {
+    content: '# ';
+    color: var(--muted);
+  }
+  .groupe ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.5rem;
+  }
+  .groupe li {
+    font-size: 0.9688rem;
+  }
+</style>

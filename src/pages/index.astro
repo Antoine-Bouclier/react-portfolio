@@ -1,0 +1,63 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import Projets from '../components/Projets.astro';
+import Parcours from '../components/Parcours.astro';
+import Competences from '../components/Competences.astro';
+import Contact from '../components/Contact.astro';
+import { profil } from '../data/contenu';
+
+const annee = new Date().getFullYear();
+---
+
+<Base
+  title={`${profil.nom} · ${profil.titre}`}
+  description="Portfolio d'Antoine Bouclier, développeur web : applications Django et JavaScript, programmation système en C/C++ à l'École 42, et infrastructure Docker auto-hébergée."
+>
+  <Nav />
+  <main>
+    <Hero />
+    <Projets />
+    <Parcours />
+    <Competences />
+    <Contact />
+  </main>
+  <footer class="footer">
+    <div class="container footer__inner mono">
+      <p>© {annee} {profil.nom}</p>
+      <p>
+        Fait avec Astro, hébergé sur
+        <a href="#projets">mon propre serveur</a>.
+      </p>
+    </div>
+  </footer>
+</Base>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--border);
+    padding-block: 2rem;
+  }
+  .footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 1.5rem;
+    font-size: 0.8125rem;
+    color: var(--muted);
+  }
+  .footer a {
+    color: var(--text);
+    text-decoration: underline;
+    text-decoration-color: var(--border);
+    text-underline-offset: 3px;
+  }
+  .footer a:hover {
+    color: var(--accent);
+  }
+  #parcours,
+  #contact {
+    background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.012) 30%, transparent);
+  }
+</style>

@@ -1,0 +1,111 @@
+---
+import { profil } from '../data/contenu';
+---
+
+<section id="contact">
+  <div class="container">
+    <div class="contact reveal">
+      <p class="prompt mono"><span class="muted">$</span> echo "Bonjour Antoine"</p>
+      <h2>Discutons.</h2>
+      <p class="contact__text">
+        Un projet, une question ou simplement envie d'échanger ? Écris-moi, je réponds rapidement.
+      </p>
+
+      <div class="contact__mail">
+        <a href={`mailto:${profil.email}`} class="contact__adresse mono">{profil.email}</a>
+        <button type="button" class="btn contact__copy" data-email={profil.email}>
+          <span class="contact__copy-label">copier</span>
+        </button>
+      </div>
+
+      <ul class="contact__links mono">
+        <li><a href={profil.linkedin} target="_blank" rel="noopener noreferrer">linkedin ↗</a></li>
+        <li><a href={profil.github} target="_blank" rel="noopener noreferrer">github ↗</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.contact__copy').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const label = btn.querySelector('.contact__copy-label');
+      try {
+        await navigator.clipboard.writeText(btn.dataset.email ?? '');
+        if (label) label.textContent = 'copié ✓';
+      } catch {
+        if (label) label.textContent = 'échec';
+      }
+      setTimeout(() => {
+        if (label) label.textContent = 'copier';
+      }, 2000);
+    });
+  });
+</script>
+
+<style>
+  .contact {
+    max-width: 44rem;
+    margin-inline: auto;
+    text-align: center;
+  }
+  .prompt {
+    font-size: 0.875rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  .muted {
+    color: var(--muted);
+  }
+  h2 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+  }
+  .contact__text {
+    color: var(--muted);
+    margin-top: 1rem;
+  }
+  .contact__mail {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 2.25rem;
+    padding: 0.5rem 0.5rem 0.5rem 1.25rem;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface);
+    max-width: 100%;
+  }
+  .contact__adresse {
+    font-size: clamp(0.875rem, 2.5vw, 1.0625rem);
+    overflow-wrap: anywhere;
+  }
+  .contact__adresse:hover {
+    color: var(--accent);
+  }
+  .contact__copy {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.8125rem;
+  }
+  .contact__links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 1.75rem 0 0;
+    font-size: 0.875rem;
+  }
+  .contact__links a {
+    color: var(--muted);
+  }
+  .contact__links a:hover {
+    color: var(--accent);
+  }
+  @media (max-width: 480px) {
+    .contact__mail {
+      padding: 0.75rem;
+    }
+  }
+</style>

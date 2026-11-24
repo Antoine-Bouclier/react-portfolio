@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Page introuvable · Antoine Bouclier" description="Cette page n'existe pas.">
+  <main class="notfound container">
+    <p class="mono prompt"><span>$</span> cd {Astro.url.pathname}</p>
+    <p class="mono erreur">bash: cd: aucun fichier ou dossier de ce type</p>
+    <h1>404</h1>
+    <a href="/" class="btn btn-primary">cd ~</a>
+  </main>
+</Base>
+
+<style>
+  .notfound {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .prompt {
+    color: var(--accent);
+    font-size: 0.9375rem;
+  }
+  .prompt span {
+    color: var(--muted);
+  }
+  .erreur {
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+  h1 {
+    font-size: clamp(5rem, 18vw, 9rem);
+    font-family: var(--mono);
+    margin-block: 0.5rem 1rem;
+  }
+</style>

@@ -1,0 +1,97 @@
+---
+import { parcours } from '../data/contenu';
+---
+
+<section id="parcours">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="prompt">git log --parcours</p>
+      <h2>Parcours</h2>
+    </div>
+
+    <ol class="timeline">
+      {
+        parcours.map((e, i) => (
+          <li class="etape reveal">
+            <span class={`etape__point ${i === 0 ? 'etape__point--actuel' : ''}`} aria-hidden="true" />
+            <p class="etape__periode mono">{e.periode}</p>
+            <div>
+              <h3>{e.titre}</h3>
+              <p class="etape__lieu mono">{e.lieu}</p>
+              <p class="etape__detail">{e.detail}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    max-width: 52rem;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 0.6rem;
+    bottom: 0.6rem;
+    width: 1px;
+    background: var(--border);
+  }
+  .etape {
+    position: relative;
+    display: grid;
+    grid-template-columns: 9rem 1fr;
+    gap: 1.5rem;
+    padding: 0 0 2.5rem 2.25rem;
+  }
+  .etape:last-child {
+    padding-bottom: 0;
+  }
+  .etape__point {
+    position: absolute;
+    left: 0;
+    top: 0.45rem;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--muted);
+  }
+  .etape__point--actuel {
+    border-color: var(--accent);
+    background: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-dim);
+  }
+  .etape__periode {
+    font-size: 0.8125rem;
+    color: var(--muted);
+    padding-top: 0.2rem;
+  }
+  .etape h3 {
+    font-size: 1.1875rem;
+  }
+  .etape__lieu {
+    font-size: 0.8125rem;
+    color: var(--accent);
+    margin-top: 0.35rem;
+  }
+  .etape__detail {
+    color: var(--muted);
+    margin-top: 0.5rem;
+    font-size: 0.9688rem;
+  }
+  @media (max-width: 640px) {
+    .etape {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+      padding-left: 1.75rem;
+    }
+  }
+</style>

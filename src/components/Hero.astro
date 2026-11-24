@@ -1,0 +1,148 @@
+---
+import { Image } from 'astro:assets';
+import photo from '../assets/antoine.png';
+import { profil } from '../data/contenu';
+---
+
+<section class="hero" id="top">
+  <div class="hero__grid" aria-hidden="true"></div>
+  <div class="container hero__inner">
+    <div class="hero__text">
+      <p class="hero__whoami mono"><span class="muted">$</span> whoami</p>
+      <h1>{profil.nom}</h1>
+      <p class="hero__role mono">
+        {profil.titre} <span class="hero__sep">//</span> <span class="hero__accroche">{profil.accroche}</span>
+      </p>
+      <p class="hero__intro">{profil.intro}</p>
+      <div class="hero__cta">
+        <a href="#projets" class="btn btn-primary">Voir mes projets</a>
+        <a href="#contact" class="btn">Me contacter</a>
+      </div>
+      <ul class="hero__socials mono">
+        <li><a href={profil.github} target="_blank" rel="noopener noreferrer">github ↗</a></li>
+        <li><a href={profil.linkedin} target="_blank" rel="noopener noreferrer">linkedin ↗</a></li>
+      </ul>
+    </div>
+
+    <div class="hero__photo">
+      <div class="hero__glow" aria-hidden="true"></div>
+      <Image
+        src={photo}
+        alt="Portrait d'Antoine Bouclier, bras croisés"
+        widths={[320, 480, 640]}
+        sizes="(max-width: 860px) 280px, 420px"
+        format="webp"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding-block: 5rem 4rem;
+  }
+  .hero__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 48px 48px;
+    opacity: 0.35;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
+  }
+  .hero__inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    align-items: center;
+    gap: 3rem;
+  }
+  .hero__whoami {
+    color: var(--accent);
+    font-size: 0.9375rem;
+    margin-bottom: 1rem;
+  }
+  .muted {
+    color: var(--muted);
+  }
+  h1 {
+    font-size: clamp(2.75rem, 7vw, 4.75rem);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+  }
+  .hero__role {
+    margin-top: 1rem;
+    font-size: clamp(1rem, 2vw, 1.1875rem);
+    color: var(--text);
+  }
+  .hero__sep {
+    color: var(--muted);
+    margin-inline: 0.25rem;
+  }
+  .hero__accroche {
+    color: var(--accent);
+  }
+  .hero__intro {
+    margin-top: 1.5rem;
+    max-width: 36rem;
+    color: var(--muted);
+  }
+  .hero__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+  .hero__socials {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0 0;
+    font-size: 0.875rem;
+  }
+  .hero__socials a {
+    color: var(--muted);
+    transition: color 0.2s;
+  }
+  .hero__socials a:hover {
+    color: var(--accent);
+  }
+  .hero__photo {
+    position: relative;
+    justify-self: center;
+    width: min(100%, 420px);
+  }
+  .hero__glow {
+    position: absolute;
+    inset: 15% 10% 0;
+    background: radial-gradient(circle at 50% 45%, rgba(62, 224, 143, 0.28), transparent 65%);
+    filter: blur(20px);
+  }
+  .hero__photo :global(img) {
+    position: relative;
+    width: 100%;
+    mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
+  }
+  @media (max-width: 860px) {
+    .hero {
+      padding-top: 3rem;
+    }
+    .hero__inner {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    .hero__photo {
+      order: -1;
+      width: 240px;
+      justify-self: start;
+    }
+  }
+</style>

@@ -1,0 +1,29 @@
+services:
+  portfolio:
+    # Build the image using the Dockerfile located in the current directory (.)
+    build: .
+    container_name: react-portfolio
+    # Automatically restart the container unless it is explicitly stopped by the admin
+    restart: unless-stopped
+    # Prevent processes in the container from gaining extra privileges
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - traefik-public
+    labels:
+      - "traefik.enable=true"
+      # Secure Routing: Match requests for both the apex domain and the www subdomain
+      - "traefik.http.routers.portfolio.rule=Host(`antoine-bouclier.fr`) || Host(`www.antoine-bouclier.fr`)"
+      # Force traffic to pass through the encrypted HTTPS entrypoint
+      - "traefik.http.routers.portfolio.entrypoints=websecure"
+      # Enable SSL/TLS encryption for this router
+      - "traefik.http.routers.portfolio.tls=true"
+      # Assign the Let's Encrypt certificates resolver managed by Traefik
+      - "traefik.http.routers.portfolio.tls.certresolver=my-resolver"
+      # Tell Traefik that Nginx listens on port 80 inside this container's network
+      - "traefik.http.services.portfolio.loadbalancer.server.port=80"
+
+networks:
+  # Connect to the pre-existing external network shared with Traefik
+  traefik-public:
+    external: true
