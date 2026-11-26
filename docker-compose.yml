@@ -20,6 +20,11 @@ services:
       - "traefik.http.routers.portfolio.tls=true"
       # Assign the Let's Encrypt certificates resolver managed by Traefik
       - "traefik.http.routers.portfolio.tls.certresolver=my-resolver"
+      # Une seule adresse pour les moteurs de recherche : www.antoine-bouclier.fr redirige (301) vers antoine-bouclier.fr
+      - "traefik.http.routers.portfolio.middlewares=portfolio-sans-www"
+      - "traefik.http.middlewares.portfolio-sans-www.redirectregex.regex=^https?://www\\.antoine-bouclier\\.fr/(.*)"
+      - "traefik.http.middlewares.portfolio-sans-www.redirectregex.replacement=https://antoine-bouclier.fr/$${1}"
+      - "traefik.http.middlewares.portfolio-sans-www.redirectregex.permanent=true"
       # Tell Traefik that Nginx listens on port 80 inside this container's network
       - "traefik.http.services.portfolio.loadbalancer.server.port=80"
 
