@@ -11,6 +11,12 @@ export const profil = {
   email: 'antoinebouclier1@gmail.com',
   github: 'https://github.com/Antoine-Bouclier',
   linkedin: 'https://www.linkedin.com/in/antoine-bouclier-4b206112a/',
+  // Ce que je cherche : affiché en haut de la page et dans le titre Google. Mettre à null quand ce n'est plus d'actualité.
+  recherche: {
+    titre: 'En recherche de stage',
+    detail: '6 mois dès janvier 2027',
+    lieu: 'Lyon ou Annecy',
+  } as { titre: string; detail: string; lieu: string } | null,
 };
 
 export type Projet = {
@@ -31,7 +37,7 @@ export const projets: Projet[] = [
       'un minuteur se lance en un clic, et une recette déjà ouverte reste utilisable sans connexion. ' +
       "Elle s'installe sur l'écran d'accueil du téléphone.",
     tags: ['Django', 'Django REST', 'PostgreSQL', 'JavaScript', 'PWA', 'Docker'],
-    site: 'https://recettes.antoine-bouclier.fr',
+    site: 'https://recettes.amaruq.fr',
     code: 'https://github.com/Antoine-Bouclier/recipes_app',
   },
   {
@@ -41,7 +47,16 @@ export const projets: Projet[] = [
       'des favoris pour reprendre une tâche en un clic et le report d’une tâche à la date de son choix. ' +
       'Ouverte à tous : on crée un compte et chacun a sa propre liste, grâce à la connexion unique de mes sites.',
     tags: ['Python', 'Flask', 'SQLite', 'JavaScript', 'Authentik', 'Docker'],
-    site: 'https://todo.antoine-bouclier.fr',
+    site: 'https://todo.amaruq.fr',
+  },
+  {
+    nom: 'amaruq.fr',
+    description:
+      'L’infrastructure qui fait tourner mes applications, sur un serveur que j’administre : chaque appli dans son conteneur Docker, ' +
+      'Traefik devant pour le HTTPS automatique, Authentik pour un compte unique sur tous les sites. ' +
+      'Chaque branche Git peut être mise en ligne sur sa propre adresse de test, et les bases sont sauvegardées chaque nuit.',
+    tags: ['Docker', 'Traefik', 'Authentik', 'Linux', 'Let’s Encrypt', 'Sauvegardes'],
+    site: 'https://amaruq.fr',
   },
   {
     nom: 'Webserv',
