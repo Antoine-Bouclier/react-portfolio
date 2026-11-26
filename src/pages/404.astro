@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 ---
 
-<Base title="Page introuvable · Antoine Bouclier" description="Cette page n'existe pas.">
+<Base title="Page introuvable · Antoine Bouclier" description="Cette page n'existe pas." noindex>
   <main class="notfound container">
     <p class="mono prompt"><span>$</span> cd {Astro.url.pathname}</p>
     <p class="mono erreur">bash: cd: aucun fichier ou dossier de ce type</p>

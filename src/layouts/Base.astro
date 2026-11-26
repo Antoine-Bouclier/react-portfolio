@@ -2,14 +2,31 @@
 import '@fontsource-variable/inter';
 import '@fontsource-variable/jetbrains-mono';
 import '../styles/global.css';
+import { profil } from '../data/contenu';
 
 interface Props {
   title: string;
   description: string;
+  noindex?: boolean; // pages à ne pas mettre dans les moteurs de recherche (404…)
 }
 
-const { title, description } = Astro.props;
+const { title, description, noindex = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const image = new URL('/og.png', Astro.site); // aperçu de partage (1200 × 630)
+
+// Fiche d'identité pour les moteurs de recherche (schema.org) : relie le site, GitHub et LinkedIn à la même personne.
+const personne = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: profil.nom,
+  jobTitle: profil.titre,
+  url: Astro.site?.href,
+  image: image.href,
+  sameAs: [profil.github, profil.linkedin],
+  alumniOf: { '@type': 'EducationalOrganization', name: 'École 42' },
+  knowsAbout: ['Développement web', 'Django', 'JavaScript', 'C++', 'Docker'],
+};
+const accueil = Astro.url.pathname === '/';
 ---
 
 <!doctype html>
@@ -19,7 +36,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta name="theme-color" content="#0a0c10" />
     <meta property="og:type" content="website" />
@@ -27,6 +44,13 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content={profil.nom} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${profil.nom} · ${profil.titre}`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    {accueil && <script type="application/ld+json" set:html={JSON.stringify(personne)} />}
     <script is:inline>document.documentElement.classList.add('js');</script>
   </head>
   <body>
