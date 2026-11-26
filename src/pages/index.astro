@@ -12,8 +12,10 @@ const annee = new Date().getFullYear();
 ---
 
 <Base
-  title={`${profil.nom} · ${profil.titre}`}
-  description="Portfolio d'Antoine Bouclier, développeur web : applications Django et JavaScript, programmation système en C/C++ à l'École 42, et infrastructure Docker auto-hébergée."
+  title={profil.recherche ? `${profil.nom} · ${profil.titre}, en recherche de stage` : `${profil.nom} · ${profil.titre}`}
+  description={profil.recherche
+    ? `${profil.nom}, développeur web formé à l'École 42, cherche un stage de ${profil.recherche.detail} à ${profil.recherche.lieu}. Django, JavaScript, C/C++, Docker.`
+    : "Portfolio d'Antoine Bouclier, développeur web : applications Django et JavaScript, programmation système en C/C++ à l'École 42, et infrastructure Docker auto-hébergée."}
 >
   <Nav />
   <main>
